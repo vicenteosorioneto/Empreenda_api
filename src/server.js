@@ -3,6 +3,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
+import screenTimeRoutes from "./routes/screenTimeRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.get("/", (req,res)=>{
 
 app.use("/users", userRoutes);
 app.use("/events", eventRoutes);
+app.use("/screentime", screenTimeRoutes);
 
 connectDB();
 
