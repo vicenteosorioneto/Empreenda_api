@@ -1,6 +1,5 @@
-
-const express = require("express");
-const db = require("../config/database.js");
+import express from "express";
+import db from "../config/database.js";
 
 const router = express.Router();
 
@@ -73,4 +72,4 @@ router.get("/summary", (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

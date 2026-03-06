@@ -1,7 +1,6 @@
-
-const express = require("express");
-const bcrypt = require("bcryptjs");
-const db = require("../config/database.js");
+import express from "express";
+import bcrypt from "bcryptjs";
+import db from "../config/database.js";
 
 const router = express.Router();
 
@@ -62,4 +61,4 @@ router.get("/:id", (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;
