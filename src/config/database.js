@@ -1,8 +1,7 @@
-'''
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-const dbPath = path.resolve(__dirname, '..\/..\/database.sqlite');
+const dbPath = path.resolve(__dirname, '../../database.sqlite');
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Erro ao conectar ao banco de dados SQLite:', err.message);
@@ -38,7 +37,7 @@ const createTables = () => {
       screenName TEXT NOT NULL,
       startTime TEXT NOT NULL,
       endTime TEXT NOT NULL,
-      duration INTEGER NOT NULL, -- in seconds
+      duration INTEGER NOT NULL,
       createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (userId) REFERENCES users (id)
     );
@@ -61,4 +60,3 @@ db.on('open', () => {
 });
 
 module.exports = db;
-'''
