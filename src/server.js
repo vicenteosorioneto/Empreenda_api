@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+const PORT = Number(process.env.PORT) || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -21,4 +22,6 @@ app.use("/events", eventRoutes);
 
 connectDB();
 
-app.listen(3000, () => console.log("Servidor rodando"));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor rodando em http://0.0.0.0:${PORT}`);
+});

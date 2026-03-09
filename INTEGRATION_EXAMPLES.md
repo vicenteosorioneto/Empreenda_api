@@ -259,14 +259,22 @@ const MissionScreen = ({ navigation, route }) => {
 
 ## 🔧 Configuração Importante
 
-### Alterar IP em ApiService.js
+### Configurar URL da API no Front
 
-Para testar no celular via Expo, altere:
+O `ApiService.js` agora lê a URL da API nesta ordem:
+
+1. `process.env.API_BASE_URL`
+2. `globalThis.__API_BASE_URL__`
+3. Fallback: `http://127.0.0.1:3000`
+
+Exemplo (Expo/React Native):
 
 ```javascript
-const API_BASE_URL = 'http://SEU_IP_LOCAL:3000';
-// Exemplo: 'http://192.168.1.100:3000'
+globalThis.__API_BASE_URL__ = 'http://SEU_IP_LOCAL:3000';
 ```
+
+Para Android Emulator, use `http://10.0.2.2:3000`.
+Para dispositivo físico, use o IP local da máquina que roda a API (ex.: `http://192.168.1.100:3000`).
 
 Para descobrir seu IP:
 ```bash

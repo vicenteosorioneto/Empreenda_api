@@ -1,7 +1,26 @@
 // services/ApiService.js
 // Serviço de integração com a API Empreenda+
 
-const API_BASE_URL = 'http://localhost:3000'; // Altere para seu IP ou domínio em produção
+const DEFAULT_API_BASE_URL = 'http://127.0.0.1:3000';
+
+const normalizeBaseUrl = (value) => {
+  if (!value || typeof value !== 'string') return DEFAULT_API_BASE_URL;
+  return value.trim().replace(/\/+$/, '');
+};
+
+const resolveApiBaseUrl = () => {
+  if (typeof process !== 'undefined' && process.env?.API_BASE_URL) {
+    return normalizeBaseUrl(process.env.API_BASE_URL);
+  }
+
+  if (typeof globalThis !== 'undefined' && globalThis.__API_BASE_URL__) {
+    return normalizeBaseUrl(globalThis.__API_BASE_URL__);
+  }
+
+  return DEFAULT_API_BASE_URL;
+};
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 class ApiService {
   // ==================== USUÁRIOS ====================
@@ -27,7 +46,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('Erro ao criar usuário:', error);
+      console.error(`Erro ao criar usuário em ${API_BASE_URL}:`, error);
       throw error;
     }
   }
@@ -46,7 +65,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('Erro ao buscar usuários:', error);
+      console.error(`Erro ao buscar usuários em ${API_BASE_URL}:`, error);
       throw error;
     }
   }
@@ -66,7 +85,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('Erro ao buscar usuário:', error);
+      console.error(`Erro ao buscar usuário em ${API_BASE_URL}:`, error);
       throw error;
     }
   }
@@ -93,7 +112,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('Erro ao atualizar usuário:', error);
+      console.error(`Erro ao atualizar usuário em ${API_BASE_URL}:`, error);
       throw error;
     }
   }
@@ -121,7 +140,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('Erro ao criar evento:', error);
+      console.error(`Erro ao criar evento em ${API_BASE_URL}:`, error);
       throw error;
     }
   }
@@ -140,7 +159,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('Erro ao buscar eventos:', error);
+      console.error(`Erro ao buscar eventos em ${API_BASE_URL}:`, error);
       throw error;
     }
   }
@@ -160,7 +179,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('Erro ao buscar eventos do usuário:', error);
+      console.error(`Erro ao buscar eventos do usuário em ${API_BASE_URL}:`, error);
       throw error;
     }
   }

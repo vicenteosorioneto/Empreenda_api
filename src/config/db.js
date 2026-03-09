@@ -6,10 +6,14 @@ const connectDB = async () => {
     if (!dbUrl) {
       throw new Error("Missing DB connection string in env");
     }
-    await mongoose.connect(dbUrl);
-    console.log("Banco conectado");
+    console.log("🔄 Conectando ao MongoDB...");
+    await mongoose.connect(dbUrl, {
+      serverSelectionTimeoutMS: 10000, // Timeout de 10 segundos
+      socketTimeoutMS: 45000,
+    });
+    console.log("✅ Banco conectado com sucesso");
   } catch (err) {
-    console.error(err);
+    console.error("❌ Erro ao conectar ao banco:", err.message);
     process.exit(1);
   }
 };
