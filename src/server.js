@@ -1,24 +1,22 @@
 import express from "express";
 import cors from "cors";
-import connectDB from "./config/db.js";
+import db from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
-import eventRoutes from "./routes/eventRoutes.js";
-import dotenv from "dotenv";
-
-dotenv.config();
+import screenTimeRoutes from "./routes/screenTimeRoutes.js";
 
 const app = express();
+const port = 3000;
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req,res)=>{
- res.send("API Empreenda+ online");
+app.get("/", (req, res) => {
+  res.send("API Empreenda+ com SQLite online");
 });
 
 app.use("/users", userRoutes);
-app.use("/events", eventRoutes);
+app.use("/screentime", screenTimeRoutes);
 
-connectDB();
-
-app.listen(3000, () => console.log("Servidor rodando"));
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
